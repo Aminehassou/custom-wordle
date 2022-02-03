@@ -1,9 +1,32 @@
 import './App.css';
+import Letterblock from './components/Letterblock.js';
 
 function App() {
   return (
-    <div className="App">
-      test 2 
+    <div >
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <br></br>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <br></br>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <br></br>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
+      <Letterblock/>
     </div>
   );
 }
