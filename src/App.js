@@ -1,32 +1,33 @@
 import './App.css';
 import Letterblock from './components/Letterblock.js';
+import React, { useState } from 'react';
+
+// fetching the GET route from the Express server which matches the GET route from server.js
+
+let callBackendAPI = async () => {
+  const response = await fetch('/express_backend');
+  const body = await response.json();
+
+  if (response.status !== 200) {
+    throw Error(body.message)
+  }
+  return body;
+};
 
 function App() {
+
+  const [val, setVal] = useState(0);
+
+  React.useEffect(() => {
+    console.log("useEffect called");
+    callBackendAPI()
+      .then(res => setVal(res.express))
+      .catch(err => console.log(err)); // Runs after the first render() lifecycle
+
+  }, []);
   return (
     <div >
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <br></br>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <br></br>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <br></br>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
-      <Letterblock/>
+      {val}
     </div>
   );
 }
