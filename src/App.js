@@ -17,19 +17,19 @@ let callBackendAPI = async () => {
 
 function App() {
 
-  const [val, setVal] = useState("Loading...");
+  const [word, setWord] = useState("Loading...");
 
   React.useEffect(() => {
     console.log("useEffect called");
     callBackendAPI()
-      .then(res => setVal(res.express))
+      .then(res => setWord(res.express))
       .catch(err => console.log(err)); // Runs after the first render() lifecycle
 
   }, []);
   return (
     <div >
-      {val}<br/>
-      <Form />
+      {word}<br/>
+      <Form word={word}/>
     </div>
   );
 }
