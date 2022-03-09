@@ -21,7 +21,6 @@ function getRandomWord(length) {
 // This displays message that the server running and listening to specified port
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-// create a GET route
 app.get('/word/random', (req, res) => {
   let randomWord = getRandomWord(length = 5);
   if (randomWord in dict) {

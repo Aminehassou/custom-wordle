@@ -5,10 +5,10 @@ function Form(props) {
     const [result, setResult] = useState("");
 
     function getOccurenceCount(word, letter) {
-        let count = new RegExp(`${letter}`, "g");
-        var t = (word.match(count) || []).length;
+        let expression = new RegExp(`${letter}`, "g");
+        var count = (word.match(expression) || []).length;
 
-        console.log(letter + " count: " + t);
+        //console.log("word: " + word + " " + letter + " count: " + count);
         return count;
     }
         
@@ -21,7 +21,8 @@ function Form(props) {
                 res += guess[i];
             } 
             else {
-
+                //console.log(getOccurenceCount(props.word, guess[i]));
+                //console.log(getOccurenceCount(guess, guess[i]));
                 if (props.word.indexOf(guess[i]) > -1 && getOccurenceCount(props.word, guess[i]) >= getOccurenceCount(guess, guess[i])) {
                     res += guess[i].toUpperCase();
                 }
