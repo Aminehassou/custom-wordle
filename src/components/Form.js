@@ -4,29 +4,26 @@ function Form(props) {
     const [guess, setGuess] = useState("");
     const [result, setResult] = useState("");
 
-    function getOccurenceCount(word, letter) {
-        let expression = new RegExp(`${letter}`, "g");
-        var count = (word.match(expression) || []).length;
-
-        //console.log("word: " + word + " " + letter + " count: " + count);
-        return count;
-    }
-        
 
     // Find which letters match the guess
     function compareLetters() {
         let res = "";
+        let tempWord = props.word;
         for (let i = 0; i < props.word.length; i++) {
             if (props.word[i] === guess[i]) {
                 res += guess[i];
+                tempWord = tempWord.replace(guess[i], "-");
+
             } 
             else {
-                //console.log(getOccurenceCount(props.word, guess[i]));
-                //console.log(getOccurenceCount(guess, guess[i]));
-                if (props.word.indexOf(guess[i]) > -1 && getOccurenceCount(props.word, guess[i]) >= getOccurenceCount(guess, guess[i])) {
+
+                if (tempWord.indexOf(guess[i]) > -1) {
                     res += guess[i].toUpperCase();
+                    tempWord = tempWord.replace(guess[i], "-");
+                    console.log(tempWord);
                 }
                 else {
+                    
                     res += "-";
                 }
 

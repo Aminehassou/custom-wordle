@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 
-// Function that gets a random word from the dictionary
+// Function that gets a random word from the dictionarys
 function getRandomWord(length) {
   let dictKeys = Object.keys(dict);
   let randomIndex = Math.floor(Math.random() * dictKeys.length);
