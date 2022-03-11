@@ -2,7 +2,8 @@ import { useState } from "react";
 
 function Form(props) {
     const [guess, setGuess] = useState("");
-    const [guessCount, setGuessCount] = useState(0);
+    const [guessList, setGuessList] = useState([]);
+
     const [result, setResult] = useState("");
 
 
@@ -14,7 +15,8 @@ function Form(props) {
         for (let i = 0; i < props.word.length; i++) {
             // Checks if letter is in the right position
             if (props.word[i] === guess[i]) {
-                currentGuess[i] = guess[i];
+                
+                currentGuess[i] = <span key = {i} style={{ color: 'green' }}>{guess[i]}</span>;
                 tempWord = tempWord.replace(guess[i], "-");
             } 
         }
@@ -22,28 +24,31 @@ function Form(props) {
             if (props.word[i] !== guess[i]) {
                 // Checks if letter is in the word but in the wrong position
                 if (tempWord.indexOf(guess[i]) > -1) {
-                    currentGuess[i] = guess[i].toUpperCase();
+                    currentGuess[i] = <span key = {i} style={{ color: 'darkgoldenrod' }}>{guess[i]}</span>;
                     tempWord = tempWord.replace(guess[i], "-");
                     console.log(tempWord);
                 }
                 else {
-                    currentGuess[i] = "-";
+                    currentGuess[i] = currentGuess[i] = <span key = {i} style={{ color: 'grey' }}>{guess[i]}</span>;
                 }
             } 
         }
 
         setResult(currentGuess);
+        setGuessList(guesses => [...guesses, currentGuess]);
+        console.log(guessList);
+
     }
 
     function handleChange(event) {
         setGuess(event.target.value);
-        console.log("guess: " + guess);
+        //console.log("guess: " + guess);
 
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log("A guess was submitted: " + guess);
+        //console.log("A guess was submitted: " + guess);
         compareLetters();
     }
 
@@ -52,7 +57,7 @@ function Form(props) {
             <form onSubmit={handleSubmit}>
                 <input type="text" value={guess} onChange={handleChange} />
             </form>
-            {result}
+            {guessList.map((guess, idx) => <div key={idx}>{guess}</div>)}
         </div>
     );
 }
