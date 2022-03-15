@@ -18,7 +18,7 @@ function getRandomWord(length) {
   return dictKeys[randomIndex];
 }
 
-// This displays message that the server running and listening to specified port
+// This displays a message that the server is running and listening to a specified port
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.get('/word/random', (req, res) => {
