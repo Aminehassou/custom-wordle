@@ -60,10 +60,7 @@ function Form(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(guessCount);
         if(!isVictorious && guessCount < props.word.length + 1) {
-            console.log("in");
-
             compareLetters();
         }
     }
