@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Letter from "./Letter";
 
 function Form(props) {
     const [guess, setGuess] = useState("");
@@ -25,20 +26,20 @@ function Form(props) {
             // Checks if letter is in the right position
             if (props.word[i] === guess[i]) {
                 
-                currentGuess[i] = <span key = {i} style={{ color: 'green' }}>{guess[i]}</span>;
+                currentGuess[i] = <Letter letter={guess[i]} isCorrectPosition={true} isCorrect={false} key={i}/>;
                 tempWord = tempWord.replace(guess[i], "-");
             } 
         }
-
+ 
         for (let i = 0; i < word_len; i++) {
             if (props.word[i] !== guess[i]) {
                 // Checks if letter is in the word but in the wrong position
                 if (tempWord.indexOf(guess[i]) > -1) {
-                    currentGuess[i] = <span key = {i} style={{ color: 'darkgoldenrod' }}>{guess[i]}</span>;
+                    currentGuess[i] = <Letter letter={guess[i]} isCorrectPosition={false} isCorrect={true} key={i}/>;
                     tempWord = tempWord.replace(guess[i], "-");
                 }
                 else {
-                    currentGuess[i] = <span key = {i} style={{ color: 'grey' }}>{guess[i]}</span>;
+                    currentGuess[i] = <Letter letter={guess[i]} isCorrectPosition={false} isCorrect={false} key={i}/>;
                 }
             } 
         }
@@ -70,7 +71,7 @@ function Form(props) {
             <form onSubmit={handleSubmit}>
                 <input type="text" value={guess} onChange={handleChange} />
             </form>
-            {guessList.map((guess, idx) => <div key={idx}>{guess}</div>)}
+            {guessList.map((guess, idx) => <div key={idx} >{guess}</div>)}
             {isVictorious ? <div>You won!</div> : ""}
             {guessCount >= props.word.length + 1 ? <div>Out of guesses!</div> : ""}
 

@@ -1,5 +1,4 @@
 import './App.css';
-import Letterblock from './components/Letterblock.js';
 import Form from './components/Form.js';
 import React, { useState } from 'react';
 
