@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Letter from "./Letter";
 
 function Word(props) {
@@ -46,6 +47,6 @@ function Word(props) {
       }
     }
   }
-  return <span>{currentGuess}</span>;
+  return <Fragment>{currentGuess}</Fragment>;
 }
 export default Word;

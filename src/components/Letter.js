@@ -10,7 +10,7 @@ function Letter(props) {
           : "#787C7E", // Grey
       }}
     >
-      {props.letter}
+      {props.letter.toUpperCase()}
     </span>
   );
 }

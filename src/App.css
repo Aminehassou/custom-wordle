@@ -1,13 +1,6 @@
-.square {
-  width: 3vw;
-  height: 3vw;
-  text-align: center;
-  border-radius: 0px;
-}
 .letterblock {
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  padding: 5px 15px 9px 15px;
   margin-right: 2px;
   margin-top: 2px;
   text-align: center;
