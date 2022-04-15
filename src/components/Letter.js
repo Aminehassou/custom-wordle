@@ -3,11 +3,11 @@ function Letter(props) {
     <span
       className="letterblock"
       style={{
-        color: props.isCorrectPosition
-          ? "green"
+        backgroundColor: props.isCorrectPosition
+          ? "#6AAA64" // Green
           : props.isCorrect
-          ? "darkgoldenrod"
-          : "red",
+          ? "#C9B458" // Yellow
+          : "#787C7E", // Grey
       }}
     >
       {props.letter}
