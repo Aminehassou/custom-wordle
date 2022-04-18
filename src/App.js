@@ -1,5 +1,7 @@
 import "./App.css";
 import Form from "./components/Form.js";
+import { Routes, Route } from "react-router-dom";
+
 import React, { useState } from "react";
 
 // fetching the GET route from the Express server which matches the GET route from server.js
@@ -27,7 +29,9 @@ function App() {
     <div>
       {word}
       <br />
-      <Form word={word} />
+      <Routes>
+        <Route path="/" element={<Form word={word} />} />
+      </Routes>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Word from "./Word";
+import { Link } from "react-router-dom";
 
 function Form(props) {
   const [guess, setGuess] = useState("");
@@ -41,6 +42,7 @@ function Form(props) {
 
   return (
     <div>
+      <Link to="/">Home</Link>
       <form onSubmit={handleSubmit}>
         <input type="text" value={guess} onChange={handleChange} />
       </form>
