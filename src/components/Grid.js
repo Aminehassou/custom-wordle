@@ -3,7 +3,7 @@ import Word from "./Word";
 
 function Grid({ word }) {
   const [guess, setGuess] = useState("");
-  const [guessList, setGuessList] = useState([]);
+  const [guessList, setGuessList] = useState(Array(6).fill(""));
   const [guessCount, setGuessCount] = useState(0);
 
   const [isVictorious, setIsVictorious] = useState(false);
@@ -18,9 +18,12 @@ function Grid({ word }) {
     }
 
     let currentGuess = guess;
-
+    setGuessList((guesses) => {
+      let newGuesses = guesses.slice();
+      newGuesses[guessCount] = currentGuess;
+      return newGuesses;
+    });
     setGuessCount(guessCount + 1);
-    setGuessList((guesses) => [...guesses, currentGuess]);
 
     // Check if the guess is correct
     if (word === guess) {
