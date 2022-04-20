@@ -21,7 +21,7 @@ function Play() {
       .catch((err) => console.log(err)); // Runs after the first render() lifecycle
   }, []);
   return (
-    <div>
+    <div className="center">
       {word}
       <Grid word={word}></Grid>
     </div>

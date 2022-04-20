@@ -1,6 +1,4 @@
-function Letter(props) {
-  const { isCorrectPosition, isCorrect, letter } = props;
-
+function Letter({ isCorrectPosition, isCorrect, letter }) {
   return (
     <span
       className="letterblock"
@@ -12,7 +10,7 @@ function Letter(props) {
           : "#787C7E", // Grey
       }}
     >
-      {letter.toUpperCase()}
+      {letter}
     </span>
   );
 }

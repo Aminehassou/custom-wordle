@@ -22,6 +22,6 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 app.get("/word/random", (req, res) => {
   let randomWord = getRandomWord((length = 5));
   if (randomWord in dict) {
-    res.send({ word: randomWord });
+    res.send({ word: randomWord.toUpperCase() });
   }
 });

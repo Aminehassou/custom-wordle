@@ -1,9 +1,7 @@
 import { Fragment } from "react";
 import Letter from "./Letter";
 
-function Word(props) {
-  const { word, guess } = props;
-
+function Word({ word, guess }) {
   let word_len = word.length;
 
   let currentGuess = [word_len + 1];
@@ -49,6 +47,6 @@ function Word(props) {
       }
     }
   }
-  return <Fragment>{currentGuess}</Fragment>;
+  return <div>{currentGuess}</div>;
 }
 export default Word;

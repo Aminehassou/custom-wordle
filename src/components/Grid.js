@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Word from "./Word";
-import { Link } from "react-router-dom";
 
-function Grid(props) {
-  const { word } = props;
-
+function Grid({ word }) {
   const [guess, setGuess] = useState("");
   const [guessList, setGuessList] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
@@ -20,7 +17,7 @@ function Grid(props) {
       return;
     }
 
-    let currentGuess = <Word word={word} guess={guess} />;
+    let currentGuess = guess;
 
     setGuessCount(guessCount + 1);
     setGuessList((guesses) => [...guesses, currentGuess]);
@@ -32,7 +29,17 @@ function Grid(props) {
   }
 
   function handleChange(event) {
-    setGuess(event.target.value);
+    // don't allow spaces
+    if (event.target.value.indexOf(" ") > -1) {
+      return;
+    }
+
+    // don't allow non-letters
+    if (event.target.value.match(/[^a-z]/i)) {
+      return;
+    }
+
+    setGuess(event.target.value.toUpperCase());
   }
 
   function handleSubmit(event) {
@@ -48,7 +55,7 @@ function Grid(props) {
         <input type="text" value={guess} onChange={handleChange} />
       </form>
       {guessList.map((guess, idx) => (
-        <div key={idx}>{guess}</div>
+        <Word key={idx} word={word} guess={guess} />
       ))}
       {isVictorious ? <div>You won!</div> : ""}
       {guessCount >= word.length + 1 ? <div>Out of guesses!</div> : ""}
