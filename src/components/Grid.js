@@ -1,14 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Word from "./Word";
 
 function Grid({ word }) {
   const [guess, setGuess] = useState("");
-  const [guessList, setGuessList] = useState(Array(6).fill(""));
+  const [guessList, setGuessList] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
 
   const [isVictorious, setIsVictorious] = useState(false);
 
-  // Find which letters match the guess
+  React.useEffect(() => {
+    setGuessList(Array(word.length + 1).fill(""));
+  }, [word]);
+
   function handleGuess() {
     let word_len = word.length;
 
