@@ -46,6 +46,11 @@ function Grid({ word }) {
     }
 
     setGuess(event.target.value.toUpperCase());
+    setGuessList((guesses) => {
+      let newGuesses = guesses.slice();
+      newGuesses[guessCount] = event.target.value.toUpperCase();
+      return newGuesses;
+    });
   }
 
   function handleSubmit(event) {

@@ -12,7 +12,7 @@ let getWordToGuess = async () => {
 };
 
 function Play() {
-  const [word, setWord] = useState("Loading...");
+  const [word, setWord] = useState("");
 
   React.useEffect(() => {
     console.log("useEffect called");
