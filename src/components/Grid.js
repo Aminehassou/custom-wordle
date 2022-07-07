@@ -35,20 +35,26 @@ function Grid({ word }) {
   }
 
   function handleChange(event) {
+    let input = event.target.value;
     // don't allow spaces
-    if (event.target.value.indexOf(" ") > -1) {
+    if (input.indexOf(" ") > -1) {
       return;
     }
 
     // don't allow non-letters
-    if (event.target.value.match(/[^a-z]/i)) {
+    if (input.match(/[^a-z]/i)) {
       return;
     }
-
-    setGuess(event.target.value.toUpperCase());
+    // limit length
+    if (input.length > word.length) {
+      return;
+    }
+    let newGuess = input.toUpperCase();
+    setGuess(newGuess);
     setGuessList((guesses) => {
       let newGuesses = guesses.slice();
-      newGuesses[guessCount] = event.target.value.toUpperCase();
+      newGuesses[guessCount] = newGuess;
+      console.log(newGuesses[0]);
       return newGuesses;
     });
   }
@@ -65,9 +71,16 @@ function Grid({ word }) {
       <form onSubmit={handleSubmit}>
         <input type="text" value={guess} onChange={handleChange} />
       </form>
-      {guessList.map((guess, idx) => (
-        <Word key={idx} word={word} guess={guess} />
-      ))}
+      <div className="grid">
+        {guessList.map((guess, idx) => (
+          <Word
+            key={idx}
+            word={word}
+            guess={guess}
+            displayColors={idx < guessCount}
+          />
+        ))}
+      </div>
       {isVictorious ? <div>You won!</div> : ""}
       {guessCount >= word.length + 1 ? <div>Out of guesses!</div> : ""}
     </div>

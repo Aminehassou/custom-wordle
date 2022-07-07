@@ -1,10 +1,27 @@
 import { Fragment } from "react";
 import Letter from "./Letter";
 
-function Word({ word, guess }) {
+function Word({ word, guess, displayColors }) {
+  guess = guess.padEnd(word.length, " ");
   let word_len = word.length;
 
   let currentGuess = [word_len + 1];
+  currentGuess = [...guess].map((letter, idx) => (
+    <Letter
+      letter={letter}
+      isCorrectPosition={false}
+      isCorrect={false}
+      key={idx}
+    />
+  ));
+  console.log(currentGuess);
+
+  if (!displayColors) {
+    console.log("displayColors is false");
+    return <div className="word">{currentGuess}</div>;
+  }
+  console.log("displayColors is true");
+
   let tempWord = word;
 
   for (let i = 0; i < word_len; i++) {
@@ -47,6 +64,8 @@ function Word({ word, guess }) {
       }
     }
   }
-  return <div>{currentGuess}</div>;
+  console.log(currentGuess);
+
+  return <div className="word">{currentGuess}</div>;
 }
 export default Word;

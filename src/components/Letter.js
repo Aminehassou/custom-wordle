@@ -1,6 +1,6 @@
 function Letter({ isCorrectPosition, isCorrect, letter }) {
   return (
-    <span
+    <div
       className="letterblock"
       style={{
         backgroundColor: isCorrectPosition
@@ -11,7 +11,7 @@ function Letter({ isCorrectPosition, isCorrect, letter }) {
       }}
     >
       {letter}
-    </span>
+    </div>
   );
 }
 export default Letter;

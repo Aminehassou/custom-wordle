@@ -1,15 +1,23 @@
 .letterblock {
-  display: inline-block;
   width: 56px;
   height: 56px;
-  margin-right: 2px;
-  margin-top: 2px;
-  text-align: center;
+
   color: white;
   font-weight: bold;
   font-size: 35px;
 }
-
+.grid {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3px;
+}
+.word {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 3px;
+}
 .center {
   text-align: center;
 }
