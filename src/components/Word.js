@@ -14,13 +14,10 @@ function Word({ word, guess, displayColors }) {
       key={idx}
     />
   ));
-  console.log(currentGuess);
 
   if (!displayColors) {
-    console.log("displayColors is false");
     return <div className="word">{currentGuess}</div>;
   }
-  console.log("displayColors is true");
 
   let tempWord = word;
 
@@ -64,7 +61,6 @@ function Word({ word, guess, displayColors }) {
       }
     }
   }
-  console.log(currentGuess);
 
   return <div className="word">{currentGuess}</div>;
 }

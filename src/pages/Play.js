@@ -20,10 +20,14 @@ function Play() {
       .then((res) => setWord(res.word))
       .catch((err) => console.log(err)); // Runs after the first render() lifecycle
   }, []);
+
+  React.useEffect(() => {
+    console.log("test3", word);
+  }, [word]);
   return (
     <div className="center">
       {word}
-      <Grid word={word}></Grid>
+      {word && <Grid word={word}></Grid>}
     </div>
   );
 }

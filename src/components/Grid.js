@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Word from "./Word";
 
 function Grid({ word }) {
@@ -8,12 +8,27 @@ function Grid({ word }) {
 
   const [isVictorious, setIsVictorious] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    // Fill guess list with default values
     setGuessList(Array(word.length + 1).fill(""));
+
+    // Add keydown event listener for keyboard input
+    window.addEventListener("keydown", handleChange);
+    console.log("EventListener");
   }, [word]);
+
+  // Update guess list when guess changes
+  useEffect(() => {
+    setGuessList((guesses) => {
+      let newGuesses = guesses.slice();
+      newGuesses[guessCount] = guess;
+      return newGuesses;
+    });
+  }, [guess]);
 
   function handleGuess() {
     let word_len = word.length;
+    console.log("handleguess", word);
 
     // Check if the guess has the same length as the word
     if (guess.length !== word_len || guess.indexOf(" ") > -1) {
@@ -30,19 +45,26 @@ function Grid({ word }) {
 
     // Check if the guess is correct
     if (word === guess) {
+      console.log("test", word);
+
       setIsVictorious(true);
     }
   }
 
   function handleChange(event) {
-    let input = event.target.value;
+    let input = event.key;
+    console.log("test2", word);
+
     // don't allow spaces
     if (input.indexOf(" ") > -1) {
       return;
     }
 
+    if (input === "Enter" && !isVictorious && guessCount < word.length + 1) {
+      handleGuess();
+    }
     // don't allow non-letters
-    if (input.match(/[^a-z]/i)) {
+    if (input.match(/[^a-z]/i) || input.length > 1) {
       return;
     }
     // limit length
@@ -50,13 +72,11 @@ function Grid({ word }) {
       return;
     }
     let newGuess = input.toUpperCase();
-    setGuess(newGuess);
-    setGuessList((guesses) => {
-      let newGuesses = guesses.slice();
-      newGuesses[guessCount] = newGuess;
-      console.log(newGuesses[0]);
-      return newGuesses;
-    });
+    setGuess((prevGuess) =>
+      (prevGuess + newGuess).length <= word.length
+        ? prevGuess + newGuess
+        : prevGuess
+    );
   }
 
   function handleSubmit(event) {
@@ -68,9 +88,6 @@ function Grid({ word }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={guess} onChange={handleChange} />
-      </form>
       <div className="grid">
         {guessList.map((guess, idx) => (
           <Word
