@@ -15,15 +15,12 @@ function Play() {
   const [word, setWord] = useState("");
 
   React.useEffect(() => {
-    console.log("useEffect called");
     getWordToGuess()
       .then((res) => setWord(res.word))
       .catch((err) => console.log(err)); // Runs after the first render() lifecycle
   }, []);
 
-  React.useEffect(() => {
-    console.log("test3", word);
-  }, [word]);
+  React.useEffect(() => {}, [word]);
   return (
     <div className="center">
       {word}

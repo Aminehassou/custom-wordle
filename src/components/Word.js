@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import Letter from "./Letter";
 
 function Word({ word, guess, displayColors }) {

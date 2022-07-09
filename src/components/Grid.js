@@ -1,90 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Word from "./Word";
 
 function Grid({ word }) {
   const [guess, setGuess] = useState("");
   const [guessList, setGuessList] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
-
   const [isVictorious, setIsVictorious] = useState(false);
 
   useEffect(() => {
     // Fill guess list with default values
     setGuessList(Array(word.length + 1).fill(""));
-
-    // Add keydown event listener for keyboard input
-    window.addEventListener("keydown", handleChange);
-    console.log("EventListener");
   }, [word]);
 
   // Update guess list when guess changes
   useEffect(() => {
-    setGuessList((guesses) => {
-      let newGuesses = guesses.slice();
-      newGuesses[guessCount] = guess;
-      return newGuesses;
-    });
-  }, [guess]);
+    function submitGuess() {
+      let word_len = word.length;
+      let currentGuess = guess;
 
-  function handleGuess() {
-    let word_len = word.length;
-    console.log("handleguess", word);
+      // Check if the guess doesn't have the same length as the word
+      if (currentGuess.length !== word_len) {
+        return;
+      }
 
-    // Check if the guess has the same length as the word
-    if (guess.length !== word_len || guess.indexOf(" ") > -1) {
-      return;
+      setGuessCount((prevGuessCount) => {
+        return prevGuessCount + 1;
+      });
+
+      // Check if the guess is correct
+      if (word === currentGuess) {
+        setIsVictorious(true);
+      }
+      setGuess("");
     }
 
-    let currentGuess = guess;
-    setGuessList((guesses) => {
-      let newGuesses = guesses.slice();
-      newGuesses[guessCount] = currentGuess;
-      return newGuesses;
-    });
-    setGuessCount(guessCount + 1);
+    function handleInput(event) {
+      let input = event.key;
+      if (isVictorious || guessCount >= word.length + 1) {
+        return;
+      }
 
-    // Check if the guess is correct
-    if (word === guess) {
-      console.log("test", word);
+      if (input === "Enter") {
+        submitGuess();
+        return;
+      }
+      if (guess.length >= word.length) {
+        return;
+      }
+      //don't allow non-letters
+      if (input.match(/[^a-z]/i) || input.length > 1) {
+        return;
+      }
+      let newGuess = input.toUpperCase();
 
-      setIsVictorious(true);
-    }
-  }
-
-  function handleChange(event) {
-    let input = event.key;
-    console.log("test2", word);
-
-    // don't allow spaces
-    if (input.indexOf(" ") > -1) {
-      return;
+      setGuess((prevGuess) => {
+        return prevGuess + newGuess;
+      });
+      setGuessList((guesses) => {
+        let newGuesses = guesses.slice();
+        newGuesses[guessCount] = guess + newGuess;
+        return newGuesses;
+      });
     }
 
-    if (input === "Enter" && !isVictorious && guessCount < word.length + 1) {
-      handleGuess();
-    }
-    // don't allow non-letters
-    if (input.match(/[^a-z]/i) || input.length > 1) {
-      return;
-    }
-    // limit length
-    if (input.length > word.length) {
-      return;
-    }
-    let newGuess = input.toUpperCase();
-    setGuess((prevGuess) =>
-      (prevGuess + newGuess).length <= word.length
-        ? prevGuess + newGuess
-        : prevGuess
-    );
-  }
+    // Add keydown event listener for keyboard input
+    window.addEventListener("keydown", handleInput);
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    if (!isVictorious && guessCount < word.length + 1) {
-      handleGuess();
-    }
-  }
+    return () => {
+      window.removeEventListener("keydown", handleInput);
+    };
+  }, [guess, guessCount, guessList.length, isVictorious, word]);
 
   return (
     <div>
