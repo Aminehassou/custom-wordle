@@ -1,8 +1,6 @@
 const express = require("express");
 const { dict } = require("./dict");
 
-const fs = require("fs");
-
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -19,9 +17,10 @@ function getRandomWord(length) {
 // This displays a message that the server is running and listening to a specified port
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-app.get("/word/random", (req, res) => {
-  let wordLen = 5;
-  let randomWord = getRandomWord((length = wordLen));
+app.get("/word/random/:wordlen", (req, res) => {
+  let wordLen = req.params.wordlen;
+  let randomWord = getRandomWord(parseInt(wordLen));
+
   if (randomWord in dict) {
     res.send({ word: randomWord.toUpperCase() });
   }

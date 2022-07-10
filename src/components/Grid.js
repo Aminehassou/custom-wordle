@@ -44,6 +44,17 @@ function Grid({ word }) {
         submitGuess();
         return;
       }
+      if (input === "Backspace") {
+        setGuess((prevGuess) => {
+          return prevGuess.slice(0, -1);
+        });
+        setGuessList((guesses) => {
+          let newGuesses = guesses.slice();
+          newGuesses[guessCount] = guess.slice(0, -1);
+          return newGuesses;
+        });
+        return;
+      }
       if (guess.length >= word.length) {
         return;
       }

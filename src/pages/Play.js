@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
 import Grid from "../components/Grid";
 
-let getWordToGuess = async () => {
-  const response = await fetch("/word/random");
+let getWordToGuess = async (wordlen) => {
+  const response = await fetch(`/word/random/${wordlen}`);
   const body = await response.json();
 
   if (response.status !== 200) {
@@ -13,9 +15,10 @@ let getWordToGuess = async () => {
 
 function Play() {
   const [word, setWord] = useState("");
+  let { wordlen } = useParams();
 
   React.useEffect(() => {
-    getWordToGuess()
+    getWordToGuess(wordlen)
       .then((res) => setWord(res.word))
       .catch((err) => console.log(err)); // Runs after the first render() lifecycle
   }, []);

@@ -4,7 +4,7 @@ function Home(props) {
   return (
     <div>
       <button>
-        <Link to="/random">Random Word</Link>
+        <Link to="/random/3">Random Word</Link>
       </button>
     </div>
   );
