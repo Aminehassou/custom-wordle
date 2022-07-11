@@ -1,12 +1,43 @@
+import React, { useState } from "react";
+
 import { Link } from "react-router-dom";
 
-function Home(props) {
+function Home() {
+  const [selectedLength, setSelectedLength] = useState(5);
+
+  function handleClick(e) {
+    setSelectedLength(parseInt(e.target.value, 10));
+  }
+
   return (
-    <div>
-      <button>
-        <Link to="/random/3">Random Word</Link>
-      </button>
-    </div>
+    <main className="flex">
+      <div className="flex choose-length">
+        {Array.from({ length: 6 }, (_, index) => {
+          let wordLength = index + 3;
+          return (
+            <button
+              className={`button number-selector ${
+                wordLength === selectedLength && "selected"
+              } `}
+              value={wordLength}
+              onClick={handleClick}
+              key={index}
+            >
+              {wordLength}
+            </button>
+          );
+        })}
+      </div>
+      <div className="flex play-wrapper">
+        <Link
+          className="button play"
+          role="button"
+          to={`/random/${selectedLength}`}
+        >
+          Play
+        </Link>
+      </div>
+    </main>
   );
 }
 export default Home;

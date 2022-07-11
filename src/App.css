@@ -1,7 +1,33 @@
+body {
+  padding: 20px;
+  background-color: #121213;
+  color:#fff;
+}
+main {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+
+}
+.flex {
+  display: flex;
+}
+.play-wrapper {
+  margin-top: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.choose-length {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
 .letterblock {
   width: 56px;
   height: 56px;
-
+  border: 2px solid grey;
   color: white;
   font-weight: bold;
   font-size: 35px;
@@ -10,6 +36,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+
   gap: 3px;
 }
 .word {
@@ -18,6 +45,34 @@
   flex-direction: row;
   gap: 3px;
 }
+.button {
+  display: block;
+  border: 7px solid rgb(91, 70, 209);
+  border-radius: 20px;
+  color: rgb(91, 70, 209);
+  background-color: transparent;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 30px;
+}
+.play {
+  width: 450px;
+}
+.number-selector {
+  width: 72.5px;
+}
+.button:hover, .selected {
+  cursor: pointer;
+  color:black;
+  background-color: rgb(91, 70, 209);
+}
 .center {
   text-align: center;
 }
+
+
+
+

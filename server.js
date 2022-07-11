@@ -19,7 +19,7 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 app.get("/word/random/:wordlen", (req, res) => {
   let wordLen = req.params.wordlen;
-  let randomWord = getRandomWord(parseInt(wordLen));
+  let randomWord = getRandomWord(parseInt(wordLen, 10));
 
   if (randomWord in dict) {
     res.send({ word: randomWord.toUpperCase() });

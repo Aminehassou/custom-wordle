@@ -26,7 +26,7 @@ function Play() {
   React.useEffect(() => {}, [word]);
   return (
     <div className="center">
-      {word}
+      <div style={{ color: "white" }}>{word}</div>
       {word && <Grid word={word}></Grid>}
     </div>
   );
