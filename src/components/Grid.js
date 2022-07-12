@@ -1,11 +1,24 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Word from "./Word";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function Grid({ word }) {
+function Grid({ word, dict }) {
   const [guess, setGuess] = useState("");
   const [guessList, setGuessList] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
   const [isVictorious, setIsVictorious] = useState(false);
+
+  const notify = () => {
+    toast.error("Not in word list", {
+      position: "top-left",
+      autoClose: 600,
+      hideProgressBar: true,
+      pauseOnHover: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
   useEffect(() => {
     // Fill guess list with default values
@@ -20,6 +33,12 @@ function Grid({ word }) {
 
       // Check if the guess doesn't have the same length as the word
       if (currentGuess.length !== word_len) {
+        return;
+      }
+
+      if (!(currentGuess.toLowerCase() in dict)) {
+        notify();
+        console.log("Wrong guess");
         return;
       }
 
@@ -80,8 +99,7 @@ function Grid({ word }) {
     return () => {
       window.removeEventListener("keydown", handleInput);
     };
-  }, [guess, guessCount, guessList.length, isVictorious, word]);
-
+  }, [dict, guess, guessCount, guessList.length, isVictorious, word]);
   return (
     <div>
       <div className="grid">
@@ -96,7 +114,9 @@ function Grid({ word }) {
       </div>
       {isVictorious ? <div>You won!</div> : ""}
       {guessCount >= word.length + 1 ? <div>Out of guesses!</div> : ""}
+      <ToastContainer />
     </div>
   );
 }
+
 export default Grid;

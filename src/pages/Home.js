@@ -11,7 +11,8 @@ function Home() {
 
   return (
     <main className="flex">
-      <div className="flex choose-length">
+      <div className="flex home-text home-text-wrapper">Choose word length</div>
+      <div className="flex choose-length-wrapper">
         {Array.from({ length: 6 }, (_, index) => {
           let wordLength = index + 3;
           return (

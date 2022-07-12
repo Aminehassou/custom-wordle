@@ -15,11 +15,16 @@ let getWordToGuess = async (wordlen) => {
 
 function Play() {
   const [word, setWord] = useState("");
+  const [dict, setDict] = useState({});
+
   let { wordlen } = useParams();
 
   React.useEffect(() => {
     getWordToGuess(wordlen)
-      .then((res) => setWord(res.word))
+      .then((res) => {
+        setWord(res.word);
+        setDict(res.dict);
+      })
       .catch((err) => console.log(err)); // Runs after the first render() lifecycle
   }, []);
 
@@ -27,7 +32,7 @@ function Play() {
   return (
     <div className="center">
       <div style={{ color: "white" }}>{word}</div>
-      {word && <Grid word={word}></Grid>}
+      {word && <Grid word={word} dict={dict}></Grid>}
     </div>
   );
 }

@@ -22,6 +22,6 @@ app.get("/word/random/:wordlen", (req, res) => {
   let randomWord = getRandomWord(parseInt(wordLen, 10));
 
   if (randomWord in dict) {
-    res.send({ word: randomWord.toUpperCase() });
+    res.send({ word: randomWord.toUpperCase(), dict: dict });
   }
 });
