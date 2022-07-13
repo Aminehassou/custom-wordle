@@ -38,7 +38,6 @@ function Grid({ word, dict }) {
 
       if (!(currentGuess.toLowerCase() in dict)) {
         notify();
-        console.log("Wrong guess");
         return;
       }
 

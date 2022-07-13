@@ -8,6 +8,7 @@ import Play from "./pages/Play";
 function App() {
   return (
     <div>
+      <div className="button help">?</div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/random/:wordlen" element={<Play />} />
