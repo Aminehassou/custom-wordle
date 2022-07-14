@@ -1,9 +1,11 @@
+
 body {
   background-color: #121213;
   color:#fff;
+  padding: 20px;
 }
 main {
-  height: 100vh;
+  height: calc(100vh - (40px));
   flex-direction: column;
   justify-content: center;
 
@@ -25,10 +27,18 @@ main {
   justify-content: center;
   gap: 4px;
 }
-.home-text-wrapper {
-  flex-direction: column;
-  align-items: center;
 
+.home-text-wrapper {
+  justify-content: center;
+}
+.home-text {
+  font-weight: bold;
+  font-size: 25px;
+  color: rgb(91, 70, 209);
+}
+.home-subtext {
+  font-size: 18px;
+  color: rgb(91, 70, 209);
 }
 .letterblock {
   width: 56px;
@@ -76,12 +86,19 @@ main {
   border: 2px solid rgb(91, 70, 209);
   border-radius: 5px;
 }
-
-.home-text {
-  font-weight: bold;
-  font-size: 25px;
-  color: rgb(91, 70, 209);
+.close-help {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 20px;
+  font-size: 20px;
+  border: 0px solid rgb(91, 70, 209);
+  border-radius: 5px;
+  padding: 1px;
 }
+
 .play {
   width: 450px;
 }
@@ -96,7 +113,28 @@ main {
 .center {
   text-align: center;
 }
-
+/* Modals */
+.modal {
+  position: fixed;
+  padding: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(18,18,19);
+  border: 2px solid rgb(91, 70, 209);
+  width: 300px;
+}
+.modal:focus {
+  outline: none;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
 
 
 
