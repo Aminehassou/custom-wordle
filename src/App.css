@@ -10,6 +10,9 @@ main {
   justify-content: center;
 
 }
+hr {
+  border-style: solid;
+}
 .flex {
   display: flex;
 }
@@ -127,7 +130,7 @@ main {
 .modal:focus {
   outline: none;
 }
-.overlay {
+.overlay {  
   position: fixed;
   top: 0;
   left: 0;
