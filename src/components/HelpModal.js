@@ -21,22 +21,37 @@ function HelpModal({ isOpen, setIsOpen }) {
           x
         </div>
         <div className="flex home-text home-text-wrapper">HOW TO PLAY</div>
-        <div className="home-subtext">
+        <div>
           <p>
             Guess the word in in a certain amount of tries (amount varies based
-            on the length of the word){" "}
-          </p>{" "}
+            on the length of the word)
+          </p>
           <p>Each guess must be a valid word.</p> Hit the enter button to
-          submit.{" "}
+          submit.
           <p>
             After each guess, the color of the tiles will change to show how
             close your guess was to the word.
-          </p>{" "}
-          <hr></hr>
-          <b>Examples:</b>
+          </p>
+          <hr className="home-subtext"></hr>
+          <div className="flex home-text home-text-wrapper">EXAMPLES</div>
           <div className="grid center">
-            <Word word={"WORD"} guess={"BARD"} displayColors={true} />
+            <p>
+              <Word word={"BORN"} guess={"DART"} displayColors={true} />
+              The letter R is in the word and in the correct position.
+            </p>
+            <p>
+              <Word word={"TORB"} guess={"BREAK"} displayColors={true} />
+              The letters B and R are in the word but aren't in their correct
+              positions.
+            </p>
+            <p>
+              <Word word={"MMMMMMM"} guess={"DESTROY"} displayColors={true} />
+              None of the letters are in the word nor are they in their correct
+              positions.
+            </p>
           </div>
+          <hr className="home-subtext"></hr>
+          You will get a random word to guess each time you start a new game.
         </div>
       </Modal>
     </div>
