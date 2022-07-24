@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react";
 import Word from "./Word";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import GridModal from "./GridModal";
+import { Link } from "react-router-dom";
 
 function Grid({ word, dict }) {
   const [guess, setGuess] = useState("");
   const [guessList, setGuessList] = useState([]);
   const [guessCount, setGuessCount] = useState(0);
   const [isVictorious, setIsVictorious] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const notify = () => {
     toast.error("Not in word list", {
@@ -111,8 +114,44 @@ function Grid({ word, dict }) {
           />
         ))}
       </div>
-      {isVictorious ? <div>You won!</div> : ""}
-      {guessCount >= word.length + 1 ? <div>Out of guesses!</div> : ""}
+      {isVictorious ? (
+        <GridModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+          <div className="flex home-text home-text-wrapper">
+            The word was {word}
+          </div>
+
+          <div className="flex play-wrapper">
+            <Link
+              className="button play"
+              role="button"
+              to={`/random/${word.length}`}
+            >
+              Play Again
+            </Link>
+          </div>
+        </GridModal>
+      ) : (
+        ""
+      )}
+      {guessCount >= word.length + 1 ? (
+        <GridModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
+          <div className="flex home-text home-text-wrapper">
+            The word was {word}
+          </div>
+
+          <div className="flex play-wrapper">
+            <Link
+              className="button play"
+              role="button"
+              to={`/random/${word.length}`}
+            >
+              Play Again
+            </Link>
+          </div>
+        </GridModal>
+      ) : (
+        ""
+      )}
       <ToastContainer />
     </div>
   );

@@ -13,7 +13,7 @@ function HelpModal({ isOpen, setIsOpen }) {
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
-        contentLabel="Example Modal"
+        contentLabel="Help Modal"
         overlayClassName="overlay"
         className="modal"
       >
@@ -35,20 +35,20 @@ function HelpModal({ isOpen, setIsOpen }) {
           <hr className="home-subtext"></hr>
           <div className="flex home-text home-text-wrapper">EXAMPLES</div>
           <div className="grid center">
-            <p>
+            <div className="modal-grid-block">
               <Word word={"BORN"} guess={"DART"} displayColors={true} />
               The letter R is in the word and in the correct position.
-            </p>
-            <p>
+            </div>
+            <div className="modal-grid-block">
               <Word word={"TORB"} guess={"BREAK"} displayColors={true} />
               The letters B and R are in the word but aren't in their correct
               positions.
-            </p>
-            <p>
+            </div>
+            <div className="modal-grid-block">
               <Word word={"MMMMMMM"} guess={"DESTROY"} displayColors={true} />
               None of the letters are in the word nor are they in their correct
               positions.
-            </p>
+            </div>
           </div>
           <hr className="home-subtext"></hr>
           You will get a random word to guess each time you start a new game.
