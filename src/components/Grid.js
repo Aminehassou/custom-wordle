@@ -3,7 +3,7 @@ import Word from "./Word";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import GridModal from "./GridModal";
-import { Link } from "react-router-dom";
+import { getDefinition } from "../api/wordDefinition";
 
 function Grid({ word, dict }) {
   const [guess, setGuess] = useState("");
@@ -11,6 +11,7 @@ function Grid({ word, dict }) {
   const [guessCount, setGuessCount] = useState(0);
   const [isVictorious, setIsVictorious] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(true);
+  const [definition, setDefinition] = useState("");
 
   const notify = () => {
     toast.error("Not in word list", {
@@ -25,6 +26,7 @@ function Grid({ word, dict }) {
 
   useEffect(() => {
     // Fill guess list with default values
+    getDefinition(word).then((res) => setDefinition(res));
     setGuessList(Array(word.length + 1).fill(""));
   }, [word]);
 
@@ -114,41 +116,23 @@ function Grid({ word, dict }) {
           />
         ))}
       </div>
-      {isVictorious ? (
-        <GridModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-          <div className="flex home-text home-text-wrapper">
-            The word was {word}
-          </div>
-
-          <div className="flex play-wrapper">
-            <Link
-              className="button play"
-              role="button"
-              to={`/random/${word.length}`}
-            >
-              Play Again
-            </Link>
-          </div>
-        </GridModal>
-      ) : (
-        ""
+      {isVictorious && (
+        <GridModal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          success={true}
+          definition={definition}
+          word={word}
+        ></GridModal>
       )}
       {guessCount >= word.length + 1 ? (
-        <GridModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}>
-          <div className="flex home-text home-text-wrapper">
-            The word was {word}
-          </div>
-
-          <div className="flex play-wrapper">
-            <Link
-              className="button play"
-              role="button"
-              to={`/random/${word.length}`}
-            >
-              Play Again
-            </Link>
-          </div>
-        </GridModal>
+        <GridModal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          success={false}
+          definition={definition}
+          word={word}
+        ></GridModal>
       ) : (
         ""
       )}
