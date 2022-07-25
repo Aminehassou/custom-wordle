@@ -4,7 +4,9 @@ import { useParams } from "react-router-dom";
 import Grid from "../components/Grid";
 
 let getWordToGuess = async (wordlen) => {
-  const response = await fetch(`/word/random/${wordlen}`);
+  const response = await fetch(
+    process.env.REACT_APP_BACKEND_URL + `/word/random/${wordlen}`
+  );
   const body = await response.json();
 
   if (response.status !== 200) {

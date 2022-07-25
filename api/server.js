@@ -1,7 +1,11 @@
+const cors = require("cors");
+
 const express = require("express");
 const { dict } = require("./dict");
 
 const app = express();
+app.use(cors());
+
 const port = process.env.PORT || 5000;
 
 // Function that gets a random word from the dictionary
