@@ -33,7 +33,6 @@ function Play() {
   React.useEffect(() => {}, [word]);
   return (
     <div className="center">
-      <div style={{ color: "white" }}>{word}</div>
       {word && <Grid word={word} dict={dict}></Grid>}
     </div>
   );
