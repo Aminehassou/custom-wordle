@@ -1,5 +1,7 @@
 const cors = require("cors");
 const https = require("https");
+const http = require("http");
+
 const fs = require("fs");
 
 const express = require("express");
@@ -28,6 +30,8 @@ function getRandomWord(length) {
 }
 
 // This displays a message that the server is running and listening to a specified port
+http.createServer(app).listen(80);
+
 httpsServer.listen(443, () => {
   console.log("HTTPS Server running on port 443");
 });
