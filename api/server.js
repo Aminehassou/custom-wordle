@@ -1,5 +1,4 @@
 const cors = require("cors");
-const https = require("https");
 const http = require("http");
 
 const fs = require("fs");
@@ -12,13 +11,6 @@ app.use(cors());
 
 const port = process.env.PORT || 5000;
 
-const httpsServer = https.createServer(
-  {
-    key: fs.readFileSync("/etc/certs/example.key"),
-    cert: fs.readFileSync("/etc/certs/example.crt"),
-  },
-  app
-);
 // Function that gets a random word from the dictionary
 function getRandomWord(length) {
   let dictKeys = Object.keys(dict);
@@ -28,12 +20,8 @@ function getRandomWord(length) {
   }
   return dictKeys[randomIndex];
 }
+app.listen(port, () => console.log(`Listening on port ${port}`));
 
-http.createServer(app).listen(80);
-
-httpsServer.listen(443, () => {
-  console.log("HTTPS Server running on port 443");
-});
 app.get("/word/random/:wordlen", (req, res) => {
   let wordLen = req.params.wordlen;
   let randomWord = getRandomWord(parseInt(wordLen, 10));
