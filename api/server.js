@@ -1,7 +1,4 @@
 const cors = require("cors");
-const http = require("http");
-
-const fs = require("fs");
 
 const express = require("express");
 const { dict } = require("./dict");
