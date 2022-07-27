@@ -14,8 +14,8 @@ const port = process.env.PORT || 5000;
 
 const httpsServer = https.createServer(
   {
-    key: fs.readFileSync("/etc/certs/key.pem"),
-    cert: fs.readFileSync("/etc/certs/cert.pem"),
+    key: fs.readFileSync("/etc/certs/example.key"),
+    cert: fs.readFileSync("/etc/certs/example.crt"),
   },
   app
 );
@@ -29,7 +29,6 @@ function getRandomWord(length) {
   return dictKeys[randomIndex];
 }
 
-// This displays a message that the server is running and listening to a specified port
 http.createServer(app).listen(80);
 
 httpsServer.listen(443, () => {
