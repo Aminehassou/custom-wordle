@@ -5,6 +5,8 @@ import { Routes, Route } from "react-router-dom";
 
 import Play from "./pages/Play";
 import HelpModal from "./components/HelpModal";
+import Footer from "./components/Footer";
+
 import { useState } from "react";
 
 function App() {
@@ -15,11 +17,13 @@ function App() {
       <div onClick={() => setIsModalOpen(true)} className="button help">
         ?
       </div>
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/random/:wordlen" element={<Play />} />
       </Routes>
       <HelpModal isOpen={isModalOpen} setIsOpen={setIsModalOpen}></HelpModal>
+      <Footer />
     </div>
   );
 }
